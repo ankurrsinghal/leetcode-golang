@@ -13,7 +13,7 @@ func (this *MyCircularQueue) EnQueue(value int) bool {
 		return false
 	}
 	this.data[this.r] = value
-	this.r = (this.r + 1)
+	this.r = (this.r + 1) % this.cap
 	return true
 }
 
@@ -21,27 +21,37 @@ func (this *MyCircularQueue) DeQueue() bool {
 	if this.IsEmpty() {
 		return false
 	}
-	this.f = this.f + 1
+	this.f = (this.f + 1) % this.cap
 	return true
 }
 
 func (this *MyCircularQueue) Front() int {
-	return this.data[this.f+1]
+	if this.IsEmpty() {
+		return -1
+	}
+	return this.data[this.f]
 }
 
 func (this *MyCircularQueue) Rear() int {
-	return this.data[this.r-1]
+	if this.IsEmpty() {
+		return -1
+	}
+	return this.data[(this.cap+this.r-1)%this.cap]
 }
 
 func (this *MyCircularQueue) IsEmpty() bool {
-	return this.r-this.f == 1
+	return this.r == this.f
 }
 
 func (this *MyCircularQueue) IsFull() bool {
-	return this.r == this.cap
+	return this.size() == this.cap-1
+}
+
+func (this *MyCircularQueue) size() int {
+	return (this.cap - this.f + this.r) % this.cap
 }
 
 // Constructor ...
-func Constructor(cap int) *MyCircularQueue {
-	return &MyCircularQueue{data: make([]int, cap), cap: cap, f: -1, r: 0}
+func Constructor(cap int) MyCircularQueue {
+	return MyCircularQueue{data: make([]int, cap+1), cap: cap + 1, f: 0, r: 0}
 }

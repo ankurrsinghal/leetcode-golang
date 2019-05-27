@@ -38,26 +38,6 @@ func TestMyCircularQueue(t *testing.T) {
 		t.Error("DeQueue Failed")
 	}
 
-	dequeue = circularQueue.DeQueue()
-	if !dequeue {
-		t.Error("DeQueue Failed")
-	}
-
-	dequeue = circularQueue.DeQueue()
-	if !dequeue {
-		t.Error("DeQueue Failed")
-	}
-
-	dequeue = circularQueue.DeQueue()
-	if dequeue {
-		t.Error("DeQueue Failed")
-	}
-
-	dequeue = circularQueue.DeQueue()
-	if dequeue {
-		t.Error("DeQueue Failed")
-	}
-
 	enqueue = circularQueue.EnQueue(4)
 	if !enqueue {
 		t.Error("Enqueue Failed")
