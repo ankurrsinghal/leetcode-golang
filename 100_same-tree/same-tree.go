@@ -21,5 +21,5 @@ func inOrder(node *TreeNode) string {
 		return ""
 	}
 
-	return fmt.Sprintf("L(%s)", inOrder(node.Left)) + fmt.Sprintf("P(%s)", strconv.Itoa(node.Val)) + fmt.Sprintf("%s", inOrder(node.Right))
+	return fmt.Sprintf("L(%s)", inOrder(node.Left)) + fmt.Sprintf("P(%s)", strconv.Itoa(node.Val)) + fmt.Sprintf("R(%s)", inOrder(node.Right))
 }
