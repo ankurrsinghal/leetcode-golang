@@ -1,63 +1,22 @@
 package symmetric_tree
 
-import (
-	"fmt"
-	"strconv"
-	"strings"
-)
-
 type TreeNode struct {
 	Val   int
 	Left  *TreeNode
 	Right *TreeNode
 }
 
-func isSymmetric(root *TreeNode) bool {
-	fmt.Println(inOrder(root))
-	fmt.Println(inOrderMirror(root))
-	return strings.Compare(inOrder(root), inOrderMirror(root)) == 0
-}
-
-func inOrder(node *TreeNode) string {
-	if node == nil {
-		return ""
+func maxDepth(root *TreeNode) int {
+	if root == nil {
+		return 0
 	}
 
-	s := ""
-	l := inOrder(node.Left)
-	r := inOrder(node.Right)
+	l := maxDepth(root.Left)
+	r := maxDepth(root.Right)
 
-	if l != "" {
-		s += fmt.Sprintf("L(%s)", l)
+	if l > r {
+		return l + 1
+	} else {
+		return r + 1
 	}
-
-	s += fmt.Sprintf("P(%s)", strconv.Itoa(node.Val))
-
-	if r != "" {
-		s += fmt.Sprintf("R(%s)", r)
-	}
-
-	return s
-}
-
-func inOrderMirror(node *TreeNode) string {
-	if node == nil {
-		return ""
-	}
-
-	s := ""
-	l := inOrderMirror(node.Right)
-	r := inOrderMirror(node.Left)
-
-	if l != "" {
-		s += fmt.Sprintf("L(%s)", l)
-	}
-
-	s += fmt.Sprintf("P(%s)", strconv.Itoa(node.Val))
-
-	if r != "" {
-		s += fmt.Sprintf("R(%s)", r)
-	}
-
-	return s
 }
