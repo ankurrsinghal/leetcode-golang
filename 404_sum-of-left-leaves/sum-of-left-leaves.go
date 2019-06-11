@@ -1,4 +1,4 @@
-package binary_tree_paths
+package sum_of_root_to_leaf_binary_numbers
 
 type TreeNode struct {
 	Val   int
@@ -6,18 +6,20 @@ type TreeNode struct {
 	Right *TreeNode
 }
 
-func sumOfLeftLeaves(root *TreeNode) int {
-	if root == nil {
+func sumRootToLeaf(root *TreeNode) int {
+	return dfs(root, 0)
+}
+
+func dfs(node *TreeNode, prefix int) int {
+	if node == nil {
 		return 0
 	}
 
-	if isLeaf(root.Left) {
-		return root.Left.Val + sumOfLeftLeaves(root.Right)
+	prefix = node.Val + prefix<<1
+
+	if node.Left != nil || node.Right != nil {
+		return dfs(node.Left, prefix) + dfs(node.Right, prefix)
 	}
 
-	return sumOfLeftLeaves(root.Left) + sumOfLeftLeaves(root.Right)
-}
-
-func isLeaf(node *TreeNode) bool {
-	return node != nil && node.Left == nil && node.Right == nil
+	return prefix
 }
