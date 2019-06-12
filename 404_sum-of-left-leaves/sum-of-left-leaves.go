@@ -1,4 +1,4 @@
-package binary_tree_paths
+package sum_of_left_leaves
 
 type TreeNode struct {
 	Val   int
